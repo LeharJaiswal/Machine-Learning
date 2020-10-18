@@ -11,48 +11,28 @@ https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv
 
 Essential Packages
 IscaretInstalled <- require("caret")
-## Loading required package: caret
-## Warning: package 'caret' was built under R version 3.3.2
-## Loading required package: lattice
-## Loading required package: ggplot2
-## Warning: package 'ggplot2' was built under R version 3.3.2
 if(!IscaretInstalled){
     install.packages("caret")
     library("caret")
     }
 
 IsrandomForestInstalled <- require("randomForest")
-## Loading required package: randomForest
-## Warning: package 'randomForest' was built under R version 3.3.3
-## randomForest 4.6-12
-## Type rfNews() to see new features/changes/bug fixes.
-## 
-## Attaching package: 'randomForest'
-## The following object is masked from 'package:ggplot2':
-## 
-##     margin
 if(!IsrandomForestInstalled){
     install.packages("randomForest")
     library("randomForest")
     }
 
 IsRpartInstalled <- require("rpart")        
-## Loading required package: rpart
-## Warning: package 'rpart' was built under R version 3.3.2
 if(!IsRpartInstalled){
     install.packages("rpart")
     library("rpart")
     }
-
-#Set seed for reproducability
 set.seed(20000)
 
  Data Processing
 
 trainUrl <- "http://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"   
 testUrl <- "http://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv" 
-
-Cleaning data
 
 training <- read.csv(url(trainUrl), na.strings=c("NA","#DIV/0!",""))  
 testing <- read.csv(url(testUrl), na.strings=c("NA","#DIV/0!",""))
