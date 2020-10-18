@@ -261,13 +261,6 @@ ggpairs(dfAnalize2, columns = 11:17,aes(color = classe),
         lower = list(continuous = my_point),diag = list(continuous = my_dens))
 ```
 
-So we can see that most of the features are very skewed, so as a preprocessing step we have to "center", "rescale" and use "BoxCox" the features.  
-Some of the features have very interesting scatter plot. But as I am in a time constrain for this project I'll revisit this later.  
-
-# Its model time  
-
-In the above section we have narrowed down to 17 predictors and also we have decided to use 3 preprocessing steps. In this section we will build on the analyzed data to create models for prediction. We will use Classification tree, Random Forest, Generalized Linear regression and SVM , them we will stack it with a Random forest to get the final model.  
-
 ```{r}
 dfTrainF <- dfTrain %>% select(final_cols,classe)
 dfValF <- dfVal %>% select(final_cols,classe)
@@ -344,13 +337,6 @@ result <- data.frame("problem_id" = dfTest$problem_id,
                      "PREDICTION_SVM" = predict(modelSVM,xTest))
 result
 ```
-
-# This is odd- UPDATE  
-
-My validation accuracy is good but my score in the quize was not correct. Maybe I should have not droped the columns when I selected 17 features. As Random Forest is doing so go I'll train one more RF with all the data and see if it helps. But still I dont understand why even after my accuracy on validation is above 95, how it is so bad. Need to look into it.  
-
-So for this update I will use all the predictors. And as there are so many columns I'll make it parallel so it doesnot take that long.  
-
 ```{r}
 dfTrainF2 <- tbl_df(dfTrain %>% 
                       select(-column_2drop,
@@ -396,7 +382,4 @@ result2 <- data.frame("problem_id" = dfTest$problem_id,
 result2
 ```
 
-This time I did better. May be because the test size is so small my previous models did so bad because my validation accuracy was ok.
-
-# reference  
 
